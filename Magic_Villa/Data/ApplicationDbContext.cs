@@ -11,6 +11,7 @@ namespace Magic_Villa.Data
 
         }
         public DbSet<Villa> Villas { get; set; }
+        public DbSet<VillaNumber> VillaNumber { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
