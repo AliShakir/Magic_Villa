@@ -10,6 +10,7 @@ namespace Magic_Villa.Data
         {
 
         }
+        public DbSet<LocalUser> LocalUser { get; set; }
         public DbSet<Villa> Villas { get; set; }
         public DbSet<VillaNumber> VillaNumber { get; set; }
 

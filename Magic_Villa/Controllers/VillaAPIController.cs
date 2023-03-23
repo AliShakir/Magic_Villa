@@ -4,6 +4,7 @@ using Magic_Villa.Data;
 using Magic_Villa.Models;
 using Magic_Villa.Models.Data;
 using Magic_Villa.Repo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
@@ -26,6 +27,7 @@ namespace Magic_Villa.Controllers
             this._response = new();
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<APIResponse>> GetVillasAsync()
         {
             try
@@ -43,6 +45,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpGet("id", Name = "GetVilla")]
+        [Authorize(Roles ="admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -103,6 +106,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpDelete("id:int", Name = "DeleteVilla")]
+        [Authorize(Roles = "CUSTOME")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
