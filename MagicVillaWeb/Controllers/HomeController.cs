@@ -2,6 +2,7 @@
 using MagicVillaWeb.Models;
 using MagicVillaWeb.Models.Data;
 using MagicVillaWeb.Services.IServices;
+using MaginVillaUtility;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ namespace MagicVillaWeb.Controllers
         public async Task<IActionResult> Index()
         {
             List<VillaDto> list = new();
-            var response = await _villaService.GetAllAsync<APIResponse>();
+            var response = await _villaService.GetAllAsync<APIResponse>(HttpContext.Session.GetString(SD.SessionToken));
             if (response != null)
             {
                 list = JsonConvert.DeserializeObject<List<VillaDto>>(Convert.ToString(response.Result));

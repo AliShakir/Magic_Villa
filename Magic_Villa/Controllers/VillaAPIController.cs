@@ -27,7 +27,6 @@ namespace Magic_Villa.Controllers
             this._response = new();
         }
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<APIResponse>> GetVillasAsync()
         {
             try
@@ -45,7 +44,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpGet("id", Name = "GetVilla")]
-        [Authorize(Roles ="admin")]
+        
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -76,6 +75,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -106,7 +106,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpDelete("id:int", Name = "DeleteVilla")]
-        [Authorize(Roles = "CUSTOME")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -138,6 +138,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpPut("id:int", Name = "UpdateVilla")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] VillaUpdateDto villaDto)
         {
             try

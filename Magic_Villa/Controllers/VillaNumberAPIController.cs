@@ -4,8 +4,10 @@ using Magic_Villa.Data;
 using Magic_Villa.Models;
 using Magic_Villa.Models.Data;
 using Magic_Villa.Repo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Net;
 
 namespace Magic_Villa.Controllers
@@ -74,6 +76,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -109,6 +112,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpDelete("id:int", Name = "DeleteVillaNumber")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -140,6 +144,7 @@ namespace Magic_Villa.Controllers
             return _response;
         }
         [HttpPut("id:int", Name = "UpdateVillaNumber")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<APIResponse>> UpdateVillaNumber(int id, [FromBody] VillaNoUpdateDto villaDto)
         {
             try
